@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference android:title="You can setting account"
+        android:key="username"
+        android:summary="If the first time you use the ap, you need to setting the account settings tab">
+    </EditTextPreference>
+    <CheckBoxPreference android:title="Don't show message"
+        android:defaultValue="false"
+        android:summary="This option if selected will not show message again"
+        android:key="ShowMessage" />
+</PreferenceScreen>

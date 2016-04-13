@@ -13,7 +13,7 @@ import com.astuetz.PagerSlidingTabStrip;
 public class UpLikeFragmentPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.IconTabProvider{
 
     final int PAGE_COUNT = 2;
-    private int tabIcon[] ={R.drawable.ic_tab_settings2,R.drawable.ic_tab_login};
+    private int tabIcon[] ={R.drawable.ic_tab_like,R.drawable.ic_tab_settings2};
 
     public UpLikeFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -22,8 +22,8 @@ public class UpLikeFragmentPagerAdapter extends FragmentPagerAdapter implements 
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) return SettingUpLikeFragment.newInstance();
-        return LoginToUpLikeFragment.newInstance();
+        if (position == 0) return LoginToUpLikeFragment.newInstance();
+        return SettingUpLikeFragment.newInstance();
     }
 
     @Override
