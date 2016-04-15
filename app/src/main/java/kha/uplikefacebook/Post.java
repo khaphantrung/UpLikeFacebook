@@ -6,22 +6,22 @@ import java.io.Serializable;
  * Created by Kha on 4/6/2016.
  */
 public class Post implements Serializable {
-    private String mPostId;
-    private String mPostContext;
+    private String postId;
+    private String postContext;
 
-    public String getmPostContext() {
-        return mPostContext;
+    public String getPostContext() {
+        return postContext;
     }
 
-    public void setmPostContext(String mPostContext) {
-        this.mPostContext = mPostContext;
+    public void setPostContext(String postContext) {
+        this.postContext = postContext;
     }
 
-    public String getmPostId() {
-        return mPostId;
+    public String getPostId() {
+        return postId;
     }
 
-    public void setmPostId(String mPostId) {
-        this.mPostId = mPostId;
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 }

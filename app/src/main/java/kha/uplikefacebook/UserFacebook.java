@@ -6,31 +6,31 @@ import java.io.Serializable;
  * Created by Kha on 4/5/2016.
  */
 public class UserFacebook implements Serializable {
-    private String mUserId;
-    private String mAccessToken;
-    private String mAppId;
+    private String userId;
+    private String accessToken;
+    private String appId;
 
-    public String getmAccessToken() {
-        return mAccessToken;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setmAccessToken(String mAccessToken) {
-        this.mAccessToken = mAccessToken;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public String getmUserId() {
-        return mUserId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setmUserId(String userID) {
-        this.mUserId = userID;
+    public void setUserId(String userID) {
+        this.userId = userID;
     }
 
     public String getmAppID() {
-        return mAppId;
+        return appId;
     }
 
     public void setmAppID(String mAppID) {
-        this.mAppId = mAppID;
+        this.appId = mAppID;
     }
 }

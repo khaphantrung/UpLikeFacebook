@@ -45,11 +45,11 @@ public class CustomRecyclerAdapter extends
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder viewHolder, final int position) {
-        //viewHolder.mTxtId.setText(mPostList.get(position).getmPostId());
-        viewHolder.mTxtContext.setText(mPostList.get(position).getmPostContext());
-        viewHolder.mImageLike.setPostId(mPostList.get(position).getmPostId());
+        //viewHolder.mTxtId.setText(mPostList.get(position).getPostId());
+        viewHolder.mTxtContext.setText(mPostList.get(position).getPostContext());
+        viewHolder.mImageLike.setPostId(mPostList.get(position).getPostId());
         viewHolder.mImageLike.setOnClickListener(mListenerLike);
-        viewHolder.mImageComment.setPostId(mPostList.get(position).getmPostId());
+        viewHolder.mImageComment.setPostId(mPostList.get(position).getPostId());
         viewHolder.mImageComment.setOnClickListener(mListenerComment);
     }
 

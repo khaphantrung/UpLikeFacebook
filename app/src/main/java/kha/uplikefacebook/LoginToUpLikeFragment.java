@@ -218,10 +218,10 @@ public class LoginToUpLikeFragment extends Fragment {
                     mProfilePictureView.setProfileId(mIdUser);
                 } else {
                     UserFacebook userFacebook = new UserFacebook();
-                    userFacebook.setmUserId(loginResult.getAccessToken().getUserId());
+                    userFacebook.setUserId(loginResult.getAccessToken().getUserId());
                     userFacebook.setmAppID(loginResult.getAccessToken().getApplicationId());
-                    userFacebook.setmAccessToken(loginResult.getAccessToken().getToken());
-                    if (mMyDatabaseHelper.isExistUserFacebook(userFacebook.getmUserId())) {
+                    userFacebook.setAccessToken(loginResult.getAccessToken().getToken());
+                    if (mMyDatabaseHelper.isExistUserFacebook(userFacebook.getUserId())) {
                         mMyDatabaseHelper.updateUser(userFacebook);
                     } else mMyDatabaseHelper.addUser(userFacebook);
                     if (mRegBtn.equals("showAllPost")) loadALLPosts();
@@ -279,10 +279,10 @@ public class LoginToUpLikeFragment extends Fragment {
                                 JSONObject jsonOb = (JSONObject) jsonArData.get(i);
                                 String stringJson = jsonOb.toString();
                                 Post post = new Post();
-                                post.setmPostId(jsonOb.get("id") + "");
+                                post.setPostId(jsonOb.get("id") + "");
                                 if (stringJson.contains("message")) {
-                                    post.setmPostContext(jsonOb.get("message") + "");
-                                } else post.setmPostContext(jsonOb.get("story") + "");
+                                    post.setPostContext(jsonOb.get("message") + "");
+                                } else post.setPostContext(jsonOb.get("story") + "");
                                 mPostList.add(post);
                             }
                         } catch (JSONException e) {
@@ -316,9 +316,9 @@ public class LoginToUpLikeFragment extends Fragment {
     private void upLikeFace(String postID) {
         List<UserFacebook> userList = mMyDatabaseHelper.getAllUserFacebook();
         for (UserFacebook user : userList) {
-            AccessToken accessTokenLike = new AccessToken(user.getmAccessToken(),
+            AccessToken accessTokenLike = new AccessToken(user.getAccessToken(),
                     user.getmAppID(),
-                    user.getmUserId(),
+                    user.getUserId(),
                     null,
                     null,
                     null,
@@ -349,9 +349,9 @@ public class LoginToUpLikeFragment extends Fragment {
             message("Can't find posts with your link input");
         List<UserFacebook> userList = mMyDatabaseHelper.getAllUserFacebook();
         for (UserFacebook user : userList) {
-            AccessToken accessTokenLike = new AccessToken(user.getmAccessToken(),
+            AccessToken accessTokenLike = new AccessToken(user.getAccessToken(),
                     user.getmAppID(),
-                    user.getmUserId(),
+                    user.getUserId(),
                     null,
                     null,
                     null,
@@ -417,9 +417,9 @@ public class LoginToUpLikeFragment extends Fragment {
     private void upCommentFace(String postID, String comment) {
         List<UserFacebook> userList = mMyDatabaseHelper.getAllUserFacebook();
         for (UserFacebook user : userList) {
-            AccessToken accessTokenLike = new AccessToken(user.getmAccessToken(),
+            AccessToken accessTokenLike = new AccessToken(user.getAccessToken(),
                     user.getmAppID(),
-                    user.getmUserId(),
+                    user.getUserId(),
                     null,
                     null,
                     null,

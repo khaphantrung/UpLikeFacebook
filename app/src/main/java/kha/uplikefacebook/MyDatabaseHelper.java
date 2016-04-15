@@ -46,14 +46,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     public void addUser(UserFacebook user) {
-        Log.i(TAG, "MyDatabaseHelper.addNote ... " + user.getmUserId());
+        Log.i(TAG, "MyDatabaseHelper.addNote ... " + user.getUserId());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_ID, user.getmUserId());
+        values.put(COLUMN_USER_ID, user.getUserId());
         values.put(COLUMN_USER_APP_ID, user.getmAppID());
-        values.put(COLUMN_USER_ACCESSTOKEN, user.getmAccessToken());
+        values.put(COLUMN_USER_ACCESSTOKEN, user.getAccessToken());
 
         db.insert(TABLE_USER, null, values);
         db.close();
@@ -71,9 +71,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 UserFacebook userFacebook = new UserFacebook();
-                userFacebook.setmUserId(cursor.getString(0));
+                userFacebook.setUserId(cursor.getString(0));
                 userFacebook.setmAppID(cursor.getString(1));
-                userFacebook.setmAccessToken(cursor.getString(2));
+                userFacebook.setAccessToken(cursor.getString(2));
 
                 userList.add(userFacebook);
             } while (cursor.moveToNext());
@@ -86,20 +86,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public boolean isExistUserFacebook(String userId){
         List<UserFacebook> userList = getAllUserFacebook();
         for (UserFacebook user : userList) {
-            if(user.getmUserId().equals(userId))
+            if(user.getUserId().equals(userId))
                 return true;
         }
         return false;
     }
     public int updateUser(UserFacebook user) {
-        Log.i(TAG, "MyDatabaseHelper.updateNote ... "  + user.getmUserId());
+        Log.i(TAG, "MyDatabaseHelper.updateNote ... "  + user.getUserId());
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_ID, user.getmUserId());
+        values.put(COLUMN_USER_ID, user.getUserId());
         values.put(COLUMN_USER_APP_ID, user.getmAppID());
-        values.put(COLUMN_USER_ACCESSTOKEN, user.getmAccessToken());
+        values.put(COLUMN_USER_ACCESSTOKEN, user.getAccessToken());
         // updating row
         return db.update(TABLE_USER, values, COLUMN_USER_ID+ " = ?",
-                new String[]{String.valueOf(user.getmUserId())});
+                new String[]{String.valueOf(user.getUserId())});
     }
 }
