@@ -57,6 +57,7 @@ public class LoginToUpLikeFragment extends Fragment {
     private ProfilePictureView mProfilePictureView;
     private ProfileTracker mProfileTracker;
     private MyDatabaseHelper mMyDatabaseHelper;
+    private ButtonEffect mButtonEffect;
     private TextToSpeech mTTSMessage;
     private String mRegBtn = " ";
 
@@ -82,6 +83,20 @@ public class LoginToUpLikeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login_to_uplike, container, false);
+        getWidgets(view);
+        addEvents();
+        trackingProfile();
+        setLoginManager();
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mProfilePictureView.requestFocus();
+    }
+    private  void getWidgets(View view){
+        mButtonEffect = new ButtonEffect();
         mTTSMessage=new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -95,26 +110,17 @@ public class LoginToUpLikeFragment extends Fragment {
         mRecyclerViewPost.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         mTxtUser = (TextView) view.findViewById(R.id.txt_user_id);
         mBtnLoginLogout = (Button) view.findViewById(R.id.btn_logout);
+        mButtonEffect.setButtonEffect(mBtnLoginLogout);
         mBtnUpLike = (Button) view.findViewById(R.id.btn_uplike);
+        mButtonEffect.setButtonEffect(mBtnUpLike);
         mBtnShowAllPosts = (Button) view.findViewById(R.id.btn_show_posts);
+        mButtonEffect.setButtonEffect(mBtnShowAllPosts);
         mBtnPublishPosts = (Button) view.findViewById(R.id.btn_publish_post);
+        mButtonEffect.setButtonEffect(mBtnPublishPosts);
         mEditLinkPost = (EditText) view.findViewById(R.id.edit_link_posts);
         mEditLinkPost.setTextIsSelectable(false);
-        mBtnLoginLogout.setFocusable(true);
-        mBtnLoginLogout.requestFocus();
-        addEvents();
         mProfilePictureView = (ProfilePictureView) view.findViewById(R.id.image);
-        trackingProfile();
-        setLoginManager();
-        return view;
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mProfilePictureView.requestFocus();
-    }
-
     private void addEvents() {
         mBtnLoginLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -359,7 +365,6 @@ public class LoginToUpLikeFragment extends Fragment {
 
                         @Override
                         public void onCompleted(GraphResponse response) {
-
                             if (response.getRawResponse() != null) {
                                 Log.d("graprequest", "response" + response.getRawResponse());
                                 String resSuccess = "{\"success\":true}";
@@ -367,19 +372,23 @@ public class LoginToUpLikeFragment extends Fragment {
                                     message("like success");
                                 }
                             }
-
                         }
                     }).executeAsync();
         }
     }
 
     private String toPostId(String linkPost) {
-        if (linkPost.contains("facebook.com")) return null;
         String postId;
+        if(linkPost.length()>27) linkPost=linkPost.substring(27);
         if (linkPost.contains("fbid")) {
             postId = linkPost.split("=")[1];
             postId = postId.split("&")[0];
-        } else postId = null;
+        } else if(linkPost.contains("posts")){
+            postId = linkPost.split("posts")[1];
+            postId = postId.split("pn")[0];
+            postId = postId.substring(1, postId.length() - 1);
+            Log.d("idPostLike", "toPostId: " + postId);
+        }else postId = null;
 
         return postId;
     }
@@ -490,6 +499,4 @@ public class LoginToUpLikeFragment extends Fragment {
 
     public void message(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
-    }
-
-}
+    }}
